@@ -70,6 +70,8 @@ app.post("/api/books/AddBook", multer().none(), async (req, res) => {
       title: req.body.title,
       desc: req.body.description,         
       price: Number(req.body.price) || 0,
+      author: req.body.author,
+      year: Number(req.body.year) || 0
     });
 
     res.json("Added Successfully");
@@ -100,6 +102,8 @@ app.put("/api/books/UpdateBook", multer().none(), async (req, res) => {
           title: req.body.title,
           desc: req.body.description,
           price: Number(req.body.price) || 0,
+          author: req.body.author,
+          year: Number(req.body.year) || 0
         }
       }
     );
