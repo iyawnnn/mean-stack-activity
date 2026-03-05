@@ -31,10 +31,16 @@ export class AppComponent implements OnInit {
     var newBook=(<HTMLInputElement>document.getElementById("newBook")).value;
     var newDesc=(<HTMLInputElement>document.getElementById("newDesc")).value;
     var newPrice=(<HTMLInputElement>document.getElementById("newPrice")).value;
+    var newAuthor=(<HTMLInputElement>document.getElementById("newAuthor")).value;
+    var newYear=(<HTMLInputElement>document.getElementById("newYear")).value;
+
     var formData=new FormData();
     formData.append("title", newBook);
     formData.append("description", newDesc);
     formData.append("price", newPrice.toString());
+    formData.append("author", newAuthor);
+    formData.append("year", newYear.toString());
+
     this.http.post(this.APIUrl+'AddBook', formData).subscribe(data=>{
       alert(data);
       this.refreshBooks();
@@ -45,13 +51,14 @@ export class AppComponent implements OnInit {
     this.editingBookId = book.id;
   }
 
-  // We now receive the values directly from the HTML template variables
-  updateBook(id: string, title: string, desc: string, price: string) {
+  updateBook(id: string, title: string, desc: string, price: string, author: string, year: string) {
     var formData = new FormData();
     formData.append("id", id);
     formData.append("title", title);
     formData.append("description", desc);
     formData.append("price", price);
+    formData.append("author", author);
+    formData.append("year", year);
 
     this.http.put(this.APIUrl + 'UpdateBook', formData).subscribe(data => {
       alert(data);
