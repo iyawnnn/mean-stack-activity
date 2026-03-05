@@ -4,7 +4,9 @@
   <div class="form-group">
     <input id="newBook" class="form-input" placeholder="Title">
     <input id="newDesc" class="form-input" placeholder="Description">
-    <input id="newPrice" class="form-input" type="number" placeholder="Book price">
+    <input id="newAuthor" class="form-input" placeholder="Author">
+    <input id="newYear" class="form-input" type="number" placeholder="Year Published">
+    <input id="newPrice" class="form-input" type="number" placeholder="Book Price">
     <button class="btn btn-primary" (click)="addBook()">Add book</button>
   </div>
 
@@ -16,17 +18,22 @@
           <div class="edit-group">
             <input #editTitle class="form-input" placeholder="Title" [value]="book.title">
             <input #editDesc class="form-input" placeholder="Description" [value]="book.desc">
+            <input #editAuthor class="form-input" placeholder="Author" [value]="book.author || ''">
+            <input #editYear class="form-input" type="number" placeholder="Year" [value]="book.year || ''">
             <input #editPrice class="form-input" type="number" placeholder="Price" [value]="book.price">
             <div class="button-group">
-              <button class="btn btn-success" (click)="updateBook(book.id, editTitle.value, editDesc.value, editPrice.value)">Save</button>
+              <button class="btn btn-success" (click)="updateBook(book.id, editTitle.value, editDesc.value, editPrice.value, editAuthor.value, editYear.value)">Save</button>
               <button class="btn btn-secondary" (click)="editingBookId = null">Cancel</button>
             </div>
           </div>
         } @else {
-          <div class="book-details">
+          <div class="book-details" style="display: flex; flex-direction: column; gap: 4px;">
             <span class="book-title">{{ book.title }}</span>
             <span class="book-desc">{{ book.desc }}</span>
-            <span class="book-price">${{ book.price }}</span>
+            <span class="book-extra" style="font-size: 0.9rem; color: #666;">
+              Author: {{ book.author || 'N/A' }} | Year: {{ book.year || 'N/A' }}
+            </span>
+            <span class="book-price" style="font-weight: bold;">${{ book.price }}</span>
           </div>
           <div class="button-group">
             <button class="btn btn-warning" (click)="editBook(book)">Edit</button>
